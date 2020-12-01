@@ -1,11 +1,13 @@
 package com.adventofcode.day1;
 
+import com.adventofcode.common.InputReader;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 import java.util.Set;
 
 import static com.google.common.collect.Sets.combinations;
+import static java.util.stream.Collectors.toSet;
 
 
 @Slf4j
@@ -13,7 +15,7 @@ import static com.google.common.collect.Sets.combinations;
 public class Controller {
 
     public Controller(InputReader inputReader) {
-        Set<Integer> input = inputReader.read("puzzle-input/day-1.txt");
+        Set<Integer> input = inputReader.read("puzzle-input/day-1.txt").stream().map(Integer::parseInt).collect(toSet());
         process(input, 2);
         process(input, 3);
     }
