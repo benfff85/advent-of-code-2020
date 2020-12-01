@@ -23,8 +23,7 @@ public class Controller {
     private void process(Set<Integer> input, Integer size) {
         for (Set<Integer> combination : combinations(input, size)) {
             if (combination.stream().mapToInt(Integer::intValue).sum() == 2020) {
-                log.info("Combination {}", combination);
-                log.info("Product {}", combination.stream().reduce(1, (a, b) -> a * b));
+                log.info("Combination: {} | Product: {}", combination, combination.stream().reduce(1, (a, b) -> a * b));
             }
         }
     }
