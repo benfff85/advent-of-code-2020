@@ -1,6 +1,6 @@
 package com.adventofcode.day2;
 
-public class PasswordPolicyB {
+public class PasswordPolicyB implements PasswordPolicy {
 
     private final Integer positionA;
     private final Integer positionB;
