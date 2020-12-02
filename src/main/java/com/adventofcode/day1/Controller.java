@@ -11,7 +11,7 @@ import static java.util.stream.Collectors.toSet;
 
 
 @Slf4j
-@Component
+@Component("controller-day-1")
 public class Controller {
 
     public Controller(InputReader inputReader) {
