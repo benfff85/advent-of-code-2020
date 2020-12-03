@@ -20,7 +20,7 @@ public class Controller {
     }
 
     private Long process(int verticalSpeed, int horizontalSpeed) {
-        int treeCount = 0;
+        long treeCount = 0;
         int horizontalIndex = 0;
 
         for (int verticalIndex = 0; verticalIndex < treeMap.size(); verticalIndex += verticalSpeed) {
@@ -30,7 +30,7 @@ public class Controller {
             horizontalIndex += horizontalSpeed;
         }
         log.info("Tree Count: {}", treeCount);
-        return (long) treeCount;
+        return treeCount;
     }
 
 }
