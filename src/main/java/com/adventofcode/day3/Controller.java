@@ -38,7 +38,7 @@ public class Controller {
             horizontalIndex += horizontalSpeed;
             verticalIndex += verticalSpeed;
         }
-        log.warn("Tree Count: {}", treeCount);
+        log.info("Tree Count: {}", treeCount);
         return (long) treeCount;
     }
 
