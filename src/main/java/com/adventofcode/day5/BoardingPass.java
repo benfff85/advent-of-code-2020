@@ -7,9 +7,9 @@ import static java.lang.Integer.parseInt;
 @Data
 public class BoardingPass {
 
-    private int row;
-    private int column;
-    private int seadId;
+    private final int row;
+    private final int column;
+    private final int seadId;
 
     public BoardingPass(String input) {
         row = parseInt(input.substring(0, 7).replace('B', '1').replace('F', '0'), 2);
