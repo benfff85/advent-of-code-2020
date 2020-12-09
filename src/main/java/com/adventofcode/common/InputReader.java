@@ -17,6 +17,7 @@ import static java.util.stream.Collectors.toList;
 public class InputReader {
 
     public List<String> read(String file) {
+        log.info("");
         log.info("Reading file {}", file);
         try (Stream<String> stream = Files.lines(Paths.get(requireNonNull(getClass().getClassLoader().getResource(file)).toURI()))) {
             return stream.collect(toList());

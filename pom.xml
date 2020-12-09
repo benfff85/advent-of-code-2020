@@ -6,7 +6,7 @@
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>2.4.0</version>
-		<relativePath/> <!-- lookup parent from repository -->
+		<relativePath/>
 	</parent>
 	<groupId>com.adventofcode</groupId>
 	<artifactId>advent-of-code-2020</artifactId>
@@ -50,6 +50,11 @@
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-lang3</artifactId>
 			<version>3.11</version>
+		</dependency>
+		<dependency>
+			<groupId>com.github.dpaukov</groupId>
+			<artifactId>combinatoricslib3</artifactId>
+			<version>3.3.0</version>
 		</dependency>
     </dependencies>
 
