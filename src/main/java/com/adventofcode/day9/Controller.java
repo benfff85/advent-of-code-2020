@@ -15,16 +15,15 @@ import static java.util.stream.Collectors.toList;
 @Component("controller-day-9")
 public class Controller {
 
-    private static final Integer PREAMBLE = 25;
-
     public Controller(InputReader inputReader) {
 
         List<Long> input = inputReader.read("puzzle-input/day-9.txt").stream().map(Long::parseLong).collect(toList());
 
+        int preamble = 25;
         Long invalidNumber = null;
-        for (int i = PREAMBLE; i < input.size(); i++) {
+        for (int i = preamble; i < input.size(); i++) {
 
-            List<Long> combinationSums = Generator.combination(input.subList(i - PREAMBLE, i))
+            List<Long> combinationSums = Generator.combination(input.subList(i - preamble, i))
                     .simple(2)
                     .stream()
                     .map(combination -> combination.stream().reduce(0L, Long::sum))
