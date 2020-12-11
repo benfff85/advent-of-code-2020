@@ -9,6 +9,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
+import static java.util.Objects.nonNull;
 import static java.util.stream.Collectors.toList;
 import static org.apache.commons.lang3.ObjectUtils.defaultIfNull;
 import static org.springframework.util.CollectionUtils.isEmpty;
@@ -18,6 +19,7 @@ import static org.springframework.util.CollectionUtils.isEmpty;
 public class Controller {
 
     private final Map<Integer, Integer> differenceOccurrenceMap = new HashMap<>();
+    private final Map<Integer, Map<List<Integer>, Long>> cache = new HashMap<>();
 
     public Controller(InputReader inputReader) {
 
@@ -32,9 +34,7 @@ public class Controller {
         }
         trackOccurrencesOfDifferences(3);
 
-        log.info("Product of adapters with diff 1 and adapters with diff 3 {}", differenceOccurrenceMap.get(1) * differenceOccurrenceMap.get(3));
-
-
+        log.info("Product of adapters with diff 1 and adapters with diff 3: {}", differenceOccurrenceMap.get(1) * differenceOccurrenceMap.get(3));
         log.info("Count of possible adapter configurations: {}", getPossibleArrangements(0, new LinkedList<>(input)));
 
     }
@@ -49,12 +49,32 @@ public class Controller {
             return 1L;
         }
 
-        Long count = getPossibleArrangements(remainingAdapters.get(0), remainingAdapters.subList(1, remainingAdapters.size()));
-
-        if (remainingAdapters.size() > 1 && remainingAdapters.get(1) - previous <= 3) {
-            count += getPossibleArrangements(previous, remainingAdapters.subList(1, remainingAdapters.size()));
+        Long count = getFromCache(previous, remainingAdapters);
+        if (nonNull(count)) {
+            return count;
         }
 
+        Integer nextAdapter = remainingAdapters.remove(0);
+        count = getPossibleArrangements(nextAdapter, remainingAdapters);
+
+        if (!remainingAdapters.isEmpty() && remainingAdapters.get(0) - previous <= 3) {
+            count += getPossibleArrangements(previous, remainingAdapters);
+        }
+        remainingAdapters.add(0, nextAdapter);
+
+        addToCache(previous, remainingAdapters, count);
         return count;
     }
+
+    private void addToCache(int previous, List<Integer> remainingAdapters, Long count) {
+        Map<List<Integer>, Long> map = new HashMap<>();
+        map.put(remainingAdapters, count);
+        cache.put(previous, map);
+    }
+
+    private Long getFromCache(int previous, List<Integer> remainingAdapters) {
+        Map<List<Integer>, Long> map = cache.get(previous);
+        return nonNull(map) ? map.get(remainingAdapters) : null;
+    }
+
 }
