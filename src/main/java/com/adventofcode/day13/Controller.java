@@ -31,6 +31,11 @@ public class Controller {
         Bus bus = buses.stream().min(comparingInt(Bus::getMinTillNextDepart)).orElseThrow(NoSuchElementException::new);
         log.info("Buses: {} {}", bus, bus.getFrequency() * bus.getMinTillNextDepart());
 
+        // TODO not sure how to solve this system of equations, this will produce the equations for input to Wolfram Alpha
+        for (Bus b : buses) {
+            log.info("t = (v{} * {}) - {};", b.getTimeOffsetFromT(), b.getFrequency(), b.getTimeOffsetFromT());
+        }
+
     }
 
 }
